@@ -1,0 +1,96 @@
+.row {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #e5e0d6;
+  border-radius: 8px;
+  background: #faf8f3;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.row:hover {
+  border-color: rgba(31, 107, 78, 0.25);
+  background: #fdfbf7;
+}
+
+.details h3,
+.details p {
+  margin: 0;
+}
+
+.details h3 {
+  font-size: 0.9375rem;
+}
+
+.details p {
+  margin-top: 3px;
+  color: #616761;
+  font-size: 0.8125rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e5e0d6;
+  border-radius: 8px;
+  background: #fff;
+  color: #171a17;
+  font-weight: 800;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.quantity button:not(:disabled):hover {
+  border-color: rgba(31, 107, 78, 0.45);
+  background: #e4f2ea;
+  transform: translateY(-1px);
+}
+
+.quantity button:disabled {
+  color: #a7aaa3;
+  background: #f2efe8;
+}
+
+.quantity span {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.actions strong {
+  justify-self: end;
+}
+
+.remove {
+  min-height: 32px;
+  border: 0;
+  background: transparent;
+  color: #616761;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.remove:hover {
+  color: #1f6b4e;
+  text-decoration: underline;
+}

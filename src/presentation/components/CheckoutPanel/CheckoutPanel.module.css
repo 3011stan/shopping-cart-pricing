@@ -1,0 +1,43 @@
+.panel {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #e5e0d6;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 30px 70px -44px rgba(23, 26, 23, 0.52);
+}
+
+.header {
+  display: grid;
+  gap: 4px;
+}
+
+.header p,
+.header h2 {
+  margin: 0;
+}
+
+.header p {
+  color: #1f6b4e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  font-size: 1.375rem;
+}
+
+.items {
+  display: grid;
+  gap: 12px;
+  padding-bottom: 2px;
+}
+
+@media (min-width: 960px) {
+  .panel {
+    position: sticky;
+    top: 24px;
+  }
+}

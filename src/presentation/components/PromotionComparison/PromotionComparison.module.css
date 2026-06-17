@@ -1,0 +1,71 @@
+.comparison {
+  display: grid;
+  gap: 12px;
+}
+
+.comparison h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.option,
+.recommended {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e5e0d6;
+  border-radius: 8px;
+  background: #fff;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.option:hover,
+.recommended:hover {
+  border-color: rgba(31, 107, 78, 0.35);
+  transform: translateY(-1px);
+}
+
+.recommended {
+  border-color: rgba(31, 107, 78, 0.45);
+  background: #f3faf5;
+}
+
+.option h4,
+.recommended h4 {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.option span,
+.recommended span {
+  display: inline-block;
+  margin-top: 3px;
+  color: #1f6b4e;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.option strong,
+.recommended strong {
+  white-space: nowrap;
+}
+
+.hint {
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8efcf;
+  color: #5f4910;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}

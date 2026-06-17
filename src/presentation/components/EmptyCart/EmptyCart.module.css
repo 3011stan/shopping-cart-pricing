@@ -1,0 +1,37 @@
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 30px 18px;
+  text-align: center;
+}
+
+.icon {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border-radius: 14px;
+  background: #e4f2ea;
+  color: #1f6b4e;
+}
+
+.icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.empty h3,
+.empty p {
+  margin: 0;
+}
+
+.empty h3 {
+  font-size: 1.125rem;
+}
+
+.empty p {
+  margin-top: 6px;
+  color: #616761;
+  line-height: 1.45;
+}

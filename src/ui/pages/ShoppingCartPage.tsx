@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useCart } from '../../app/cart/use-cart';
 import { useProducts } from '../../app/products/use-products';
+import type { Product } from '../../domain/product/product.types';
 import { calculateBestPricingOption } from '../../domain/pricing/pricing-engine';
 import { CheckoutPanel } from '../components/CheckoutPanel/CheckoutPanel';
 import { CustomerTypeSelector } from '../components/CustomerTypeSelector/CustomerTypeSelector';
@@ -22,6 +23,8 @@ export function ShoppingCartPage() {
     () => calculateBestPricingOption({ items, customerType }),
     [items, customerType],
   );
+  const getProductQuantity = (productId: Product['id']) =>
+    items.find((item) => item.product.id === productId)?.quantity ?? 0;
 
   return (
     <main className={styles.page}>
@@ -47,6 +50,9 @@ export function ShoppingCartPage() {
             isLoading={productsQuery.isLoading}
             isError={productsQuery.isError}
             onAddProduct={addItem}
+            getProductQuantity={getProductQuantity}
+            onIncreaseQuantity={increaseQuantity}
+            onDecreaseQuantity={decreaseQuantity}
           />
           <CheckoutPanel
             items={items}

@@ -57,7 +57,7 @@
   font-size: 1.25rem;
 }
 
-.footer button {
+.addButton {
   min-width: 76px;
   min-height: 40px;
   border: 0;
@@ -71,10 +71,50 @@
     transform 160ms ease;
 }
 
-.footer button:hover {
+.addButton:hover {
   background: #18563e;
   box-shadow: 0 12px 24px -18px rgba(31, 107, 78, 0.9);
   transform: translateY(-1px);
+}
+
+.quantity {
+  display: grid;
+  grid-template-columns: 36px minmax(28px, auto) 36px;
+  align-items: center;
+  overflow: hidden;
+  min-height: 40px;
+  border: 1px solid #d8e4db;
+  border-radius: 8px;
+  background: #f7fbf8;
+}
+
+.quantity button {
+  min-width: 36px;
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: #1f6b4e;
+  font-weight: 800;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.quantity button:not(:disabled):hover {
+  background: #e4f2ea;
+  color: #18563e;
+}
+
+.quantity button:disabled {
+  color: #a0a8a1;
+}
+
+.quantity span {
+  min-width: 28px;
+  color: #171a17;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  text-align: center;
 }
 
 @media (min-width: 960px) {

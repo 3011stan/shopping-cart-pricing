@@ -1,4 +1,5 @@
 import type { CatalogProduct } from '../../../app/products/product.types';
+import type { Product } from '../../../domain/product/product.types';
 import { ProductCard } from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 
@@ -7,6 +8,9 @@ type ProductListProps = {
   isLoading: boolean;
   isError: boolean;
   onAddProduct(product: CatalogProduct): void;
+  getProductQuantity(productId: Product['id']): number;
+  onIncreaseQuantity(productId: Product['id']): void;
+  onDecreaseQuantity(productId: Product['id']): void;
 };
 
 export function ProductList({
@@ -14,6 +18,9 @@ export function ProductList({
   isLoading,
   isError,
   onAddProduct,
+  getProductQuantity,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
 }: ProductListProps) {
   return (
     <section className={styles.section} aria-labelledby="products-title">
@@ -35,7 +42,10 @@ export function ProductList({
             <ProductCard
               key={product.id}
               product={product}
+              quantityInCart={getProductQuantity(product.id)}
               onAddProduct={onAddProduct}
+              onIncreaseQuantity={onIncreaseQuantity}
+              onDecreaseQuantity={onDecreaseQuantity}
             />
           ))}
         </div>

@@ -41,6 +41,7 @@ describe('App', () => {
     const checkout = getCheckout();
     expect(within(checkout).getByText('T-shirt')).toBeInTheDocument();
     expect(getProductQuantity('T-shirt')).toHaveTextContent('1');
+    expect(getProductCardQuantity('T-shirt')).toHaveTextContent('1');
     expect(within(checkout).getByText('Subtotal')).toBeInTheDocument();
     expectCheckoutToShow('$35.99');
     expect(within(checkout).getByText('Final total')).toBeInTheDocument();
@@ -53,12 +54,12 @@ describe('App', () => {
     await addProduct(user, 'T-shirt');
 
     const decreaseButton = screen.getByRole('button', {
-      name: /decrease t-shirt quantity/i,
+      name: /^decrease t-shirt quantity$/i,
     });
     expect(decreaseButton).toBeDisabled();
 
     await user.click(
-      screen.getByRole('button', { name: /increase t-shirt quantity/i }),
+      screen.getByRole('button', { name: /^increase t-shirt quantity$/i }),
     );
 
     expect(getProductQuantity('T-shirt')).toHaveTextContent('2');
@@ -69,6 +70,34 @@ describe('App', () => {
 
     expect(getProductQuantity('T-shirt')).toHaveTextContent('1');
     expect(decreaseButton).toBeDisabled();
+  });
+
+  it('updates product quantity from the product card', async () => {
+    const { user } = renderApp();
+
+    await addProduct(user, 'T-shirt');
+
+    const productCardDecreaseButton = screen.getByRole('button', {
+      name: /decrease t-shirt quantity from product card/i,
+    });
+    expect(productCardDecreaseButton).toBeDisabled();
+
+    await user.click(
+      screen.getByRole('button', {
+        name: /increase t-shirt quantity from product card/i,
+      }),
+    );
+
+    expect(getProductCardQuantity('T-shirt')).toHaveTextContent('2');
+    expect(getProductQuantity('T-shirt')).toHaveTextContent('2');
+    expectCheckoutToShow('$71.98');
+    expect(productCardDecreaseButton).toBeEnabled();
+
+    await user.click(productCardDecreaseButton);
+
+    expect(getProductCardQuantity('T-shirt')).toHaveTextContent('1');
+    expect(getProductQuantity('T-shirt')).toHaveTextContent('1');
+    expect(productCardDecreaseButton).toBeDisabled();
   });
 
   it('removes a product from the cart', async () => {
@@ -106,8 +135,8 @@ describe('App', () => {
     const { user } = renderApp();
 
     await addProduct(user, 'Dress');
-    await addProduct(user, 'Dress');
-    await addProduct(user, 'Dress');
+    await increaseProductQuantityFromCard(user, 'Dress');
+    await increaseProductQuantityFromCard(user, 'Dress');
     await user.click(screen.getByRole('button', { name: /vip/i }));
 
     const checkout = getCheckout();
@@ -164,6 +193,17 @@ async function addProduct(
   await user.click(addButton);
 }
 
+async function increaseProductQuantityFromCard(
+  user: ReturnType<typeof userEvent.setup>,
+  productName: string,
+) {
+  await user.click(
+    screen.getByRole('button', {
+      name: new RegExp(`^increase ${productName} quantity from product card$`, 'i'),
+    }),
+  );
+}
+
 function getCheckout() {
   return screen.getByRole('complementary', {
     name: /cart & pricing/i,
@@ -173,6 +213,14 @@ function getCheckout() {
 function getProductQuantity(productName: string) {
   return within(
     screen.getByLabelText(new RegExp(`^${productName} quantity$`, 'i')),
+  ).getByText(/\d+/);
+}
+
+function getProductCardQuantity(productName: string) {
+  return within(
+    screen.getByLabelText(
+      new RegExp(`^${productName} quantity in product card$`, 'i'),
+    ),
   ).getByText(/\d+/);
 }
 

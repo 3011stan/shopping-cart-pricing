@@ -27,7 +27,11 @@ export function CartItemRow({
         </p>
       </div>
       <div className={styles.actions}>
-        <div className={styles.quantity} aria-label={`${product.name} quantity`}>
+        <div
+          className={styles.quantity}
+          role="group"
+          aria-label={`${product.name} quantity`}
+        >
           <button
             type="button"
             aria-label={`Decrease ${product.name} quantity`}

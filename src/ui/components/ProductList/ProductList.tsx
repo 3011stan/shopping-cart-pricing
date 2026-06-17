@@ -1,12 +1,12 @@
-import type { Product } from '../../../domain/product/product.types';
+import type { CatalogProduct } from '../../../app/products/product.types';
 import { ProductCard } from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 
 type ProductListProps = {
-  products: Product[];
+  products: CatalogProduct[];
   isLoading: boolean;
   isError: boolean;
-  onAddProduct(product: Product): void;
+  onAddProduct(product: CatalogProduct): void;
 };
 
 export function ProductList({
